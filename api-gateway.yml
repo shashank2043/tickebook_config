@@ -52,6 +52,13 @@ spring:
               predicates:
                 - Path=/payments/**
 
+            - id: monitoring-service
+              uri: lb://management-service
+              predicates:
+                - Path=/metrics/**
+              filters:
+                - StripPrefix=1
+
 eureka:
   client:
     registry-fetch-interval-seconds: 5
