@@ -11,10 +11,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
   kafka:
     bootstrap-servers: localhost:9092
     admin:
@@ -43,3 +39,16 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 jwt:
   secret: tickebook_auth_jwt_super_secure_secret_2026_value
+logging:
+  file:
+    name: C:/logs/tickebook/${spring.application.name}.log
+
+  level:
+    root: INFO
+    org.springframework: WARN
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+    org.team11.tickebook: DEBUG   # your base package
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level ${spring.application.name:-auth-service} [%X{traceId}] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level ${spring.application.name:-auth-service} [%X{traceId}] %logger - %msg%n"
