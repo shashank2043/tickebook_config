@@ -41,12 +41,8 @@ spring:
               uri: lb://AUTH-SERVICE
               predicates:
                 - Path=/auth/**
-
-            - id: auth-service-protected
-              uri: lb://AUTH-SERVICE
-              predicates:
                 - Path=/api/user/**
-            
+
             - id: payment-service
               uri: lb://PAYMENT-SERVICE
               predicates:
@@ -58,7 +54,17 @@ spring:
                 - Path=/metrics/**
               filters:
                 - StripPrefix=1
-
+            - id: auth-service-swagger
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/auth-service-swagger/v3/docs
+              filters:
+                - StripPrefix=1
+springdoc:
+  swagger-ui:
+    urls:
+      - name: auth-service
+        url: /auth-service-swagger/v3/docs
 eureka:
   client:
     registry-fetch-interval-seconds: 5
