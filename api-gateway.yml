@@ -53,18 +53,27 @@ spring:
                 - Path=/metrics/**
               filters:
                 - StripPrefix=1
+
             - id: auth-service-swagger
               uri: lb://AUTH-SERVICE
               predicates:
                 - Path=/auth-service-swagger/**
               filters:
                 - RewritePath=/auth-service-swagger/(?<segment>.*), /${segment}
+
             - id: admin-service-swagger
               uri: lb://ADMIN-SERVICE
               predicates:
                 - Path=/swagger/admin-service/**
               filters:
                 - RewritePath=/swagger/admin-service/(?<segment>.*), /${segment}
+
+            - id: consumer-service-swagger
+              uri: lb://CONSUMER-SERVICE
+              predicates:
+                - Path=/swagger/consumer-service/**
+              filters:
+                - RewritePath=/swagger/consumer-service/(?<segment>.*), /${segment}
 springdoc:
   swagger-ui:
     urls:
@@ -72,6 +81,8 @@ springdoc:
         url: /auth-service-swagger/v3/api-docs
       - name: admin-service
         url: /swagger/admin-service/v3/api-docs
+      - name: consumer-service
+        url: /swagger/consumer-service/v3/api-docs
     config-url: /v3/api-docs/swagger-config
   api-docs:
     enabled: true
