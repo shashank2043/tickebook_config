@@ -57,9 +57,9 @@ spring:
             - id: auth-service-swagger
               uri: lb://AUTH-SERVICE
               predicates:
-                - Path=/auth-service-swagger/v3/api-docs
+                - Path=/auth-service-swagger/**
               filters:
-                - StripPrefix=1
+                - RewritePath=/auth-service-swagger/(?<segment>.*), /${segment}
 springdoc:
   swagger-ui:
     urls:
