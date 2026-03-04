@@ -57,14 +57,14 @@ spring:
             - id: auth-service-swagger
               uri: lb://AUTH-SERVICE
               predicates:
-                - Path=/auth-service-swagger/v3/docs
+                - Path=/auth-service-swagger/v3/api-docs
               filters:
                 - StripPrefix=1
 springdoc:
   swagger-ui:
     urls:
       - name: auth-service
-        url: /auth-service-swagger/v3/docs
+        url: /auth-service-swagger/v3/api-docs
 eureka:
   client:
     registry-fetch-interval-seconds: 5
