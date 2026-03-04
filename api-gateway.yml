@@ -59,11 +59,19 @@ spring:
                 - Path=/auth-service-swagger/**
               filters:
                 - RewritePath=/auth-service-swagger/(?<segment>.*), /${segment}
+            - id: admin-service-swagger
+              uri: lb://ADMIN-SERVICE
+              predicates:
+                - Path=/swagger/admin-service/**
+              filters:
+                - RewritePath=/swagger/admin-service/(?<segment>.*), /${segment}
 springdoc:
   swagger-ui:
     urls:
       - name: auth-service
         url: /auth-service-swagger/v3/api-docs
+      - name: admin-service
+        url: /swagger/admin-service/v3/api-docs
     config-url: /v3/api-docs/swagger-config
   api-docs:
     enabled: true
