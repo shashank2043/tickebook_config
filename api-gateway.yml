@@ -74,6 +74,13 @@ spring:
                 - Path=/swagger/consumer-service/**
               filters:
                 - RewritePath=/swagger/consumer-service/(?<segment>.*), /${segment}
+
+            - id: movie-service-swagger
+              uri: lb://MOVIE-SERVICE
+              predicates:
+                - Path=/swagger/movie-service/**
+              filters:
+                - RewritePath=/swagger/movie-service/(?<segment>.*), /${segment}
 springdoc:
   swagger-ui:
     urls:
@@ -83,6 +90,8 @@ springdoc:
         url: /swagger/admin-service/v3/api-docs
       - name: consumer-service
         url: /swagger/consumer-service/v3/api-docs
+      - name: movie-service
+        url: /swagger/movie-service/v3/api-docs
     config-url: /v3/api-docs/swagger-config
   api-docs:
     enabled: true
