@@ -65,6 +65,9 @@ springdoc:
     urls:
       - name: auth-service
         url: /auth-service-swagger/v3/api-docs
+    config-url: /v3/api-docs/swagger-config
+  api-docs:
+    enabled: true
 eureka:
   client:
     registry-fetch-interval-seconds: 5
