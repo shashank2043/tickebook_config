@@ -1,18 +1,18 @@
 server:
-  port: 8080
+  port: 0
 spring:
   main:
     lazy-initialization: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: Shashank@123
-    url: jdbc:mysql://host.docker.internal:3306/auth_db?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/auth_db?createDatabaseIfNotExist=true
     username: shashank
   jpa:
     hibernate:
       ddl-auto: update
   kafka:
-    bootstrap-servers: host.docker.internal:9092
+    bootstrap-servers: localhost:9092
     admin:
       fail-fast: false
     producer:
@@ -36,7 +36,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://host.docker.internal:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 jwt:
   secret: tickebook_auth_jwt_super_secure_secret_2026_value
 logging:
