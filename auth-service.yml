@@ -36,7 +36,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://host.docker.internal:8761/eureka/
+      defaultZone: http://discovery-server:8761/eureka/
 jwt:
   secret: tickebook_auth_jwt_super_secure_secret_2026_value
 logging:
