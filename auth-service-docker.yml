@@ -14,6 +14,7 @@ spring:
   kafka:
     bootstrap-servers: kafka:9092
     admin:
+      auto-create: true
       fail-fast: false
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -22,9 +23,9 @@ spring:
       retries: 3
       properties:
         spring.json.add.type.headers: false
-        max.block.ms: 2000
-        delivery.timeout.ms: 5000
-        request.timeout.ms: 3000
+        max.block.ms: 60000
+        delivery.timeout.ms: 120000
+        request.timeout.ms: 30000
     properties:
       # Slow down reconnection attempts
       reconnect.backoff.ms: 5000
