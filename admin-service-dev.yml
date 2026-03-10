@@ -22,6 +22,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
+        spring.json.value.default.type: org.team11.tickebook.adminservice.kafka.UserCreatedEvent
 eureka:
   client:
     serviceUrl:
