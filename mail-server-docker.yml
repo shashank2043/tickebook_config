@@ -1,0 +1,39 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka/
+server:
+  port: 8080
+spring:
+  config:
+    import: optional:configserver:http://config-server:8888
+  kafka:
+    listener:
+      auto-startup: false
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: mail-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        reconnect.backoff.ms: 5000
+        reconnect.backoff.max.ms: 10000
+        retry.backoff.ms: 5000
+        spring.json.trusted.packages: "*"
+        spring.json.value.default.type: org.team11.tickebook.mail_server.dto.Mail
+  mail:
+    host: smtp.gmail.com
+    password: ${SMTP_PASSWORD}
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    username: shashankpulluri1@gmail.com
+logging:
+  level:
+    org.springframework.kafka: INFO
+
