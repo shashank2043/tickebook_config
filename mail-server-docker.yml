@@ -7,7 +7,7 @@ server:
 spring:
   kafka:
     listener:
-      auto-startup: false
+      auto-startup: true
     bootstrap-servers: kafka:9092
     consumer:
       group-id: mail-group
