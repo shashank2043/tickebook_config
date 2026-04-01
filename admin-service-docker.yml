@@ -4,7 +4,10 @@ spring:
     url: jdbc:mysql://mysql:3306/admin_db?createDatabaseIfNotExist=true
     username: shashank
     password: Shashank@123
-
+  cloud:
+    openfeign:
+      micrometer:
+        enabled: true
   jpa:
     hibernate:
       ddl-auto: update
@@ -45,6 +48,8 @@ management:
   tracing:
     sampling:
       probability: 1.0   # trace all requests
+    propagation:
+      type: b3
 
   zipkin:
     tracing:
