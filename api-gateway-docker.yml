@@ -133,3 +133,23 @@ eureka:
 
 jwt:
   secret: tickebook_auth_jwt_super_secure_secret_2026_value
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,loggers
+
+  endpoint:
+    health:
+      show-details: always
+
+  tracing:
+    sampling:
+      probability: 1.0   # trace all requests
+
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
