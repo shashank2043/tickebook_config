@@ -55,5 +55,9 @@ management:
     tracing:
       endpoint: http://zipkin:9411/api/v2/spans
 logging:
+  level:
+    zipkin2: DEBUG
+    org.springframework.web.client: DEBUG
+    io.micrometer.tracing: DEBUG
   pattern:
     level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
