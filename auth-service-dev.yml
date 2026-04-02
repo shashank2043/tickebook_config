@@ -1,6 +1,10 @@
 server:
-  port: 8080
+  port: 0
 spring:
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
   main:
     lazy-initialization: true
   datasource:
