@@ -14,7 +14,7 @@ spring:
     username: shashank
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   kafka:
     bootstrap-servers: kafka:9092
     admin:
