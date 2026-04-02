@@ -4,6 +4,11 @@ server:
 spring:
   cloud:
     gateway:
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: globalCircuitBreaker
+            fallbackUri: forward:/fallback
       server:
         webflux:
           globalcors:
