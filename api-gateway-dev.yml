@@ -7,11 +7,11 @@ spring:
       cache:
         enabled: true
     gateway:
-      httpclient:
-        connect-timeout: 5000
-        response-timeout: 10s
       server:
         webflux:
+          httpclient:
+            connect-timeout: 5000
+            response-timeout: 10s
           globalcors:
             cors-configurations:
               '[/**]':
