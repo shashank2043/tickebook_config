@@ -40,20 +40,36 @@ spring:
                   args:
                     name: movieServiceCB
                     fallbackUri: forward:/fallback
+
             - id: consumer-service
               uri: lb://CONSUMER-SERVICE
               predicates:
                 - Path=/api/bookings/**,/api/booking-seats/**,/api/tickets/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: movieServiceCB
+                    fallbackUri: forward:/fallback
 
             - id: show-service
               uri: lb://SHOW-SERVICE
               predicates:
                 - Path=/api/shows/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: movieServiceCB
+                    fallbackUri: forward:/fallback
 
             - id: theatre-service
               uri: lb://THEATRE-SERVICE
               predicates:
                 - Path=/api/screens/**,/api/seats/**,/api/theatres/**,/api/owner/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: movieServiceCB
+                    fallbackUri: forward:/fallback
 
             - id: admin-service
               uri: lb://ADMIN-SERVICE
@@ -74,6 +90,11 @@ spring:
               uri: lb://PAYMENT-SERVICE
               predicates:
                 - Path=/payments/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: movieServiceCB
+                    fallbackUri: forward:/fallback
 
             - id: monitoring-service
               uri: lb://management-service
@@ -81,6 +102,10 @@ spring:
                 - Path=/metrics/**
               filters:
                 - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: movieServiceCB
+                    fallbackUri: forward:/fallback
 
             - id: auth-service-swagger
               uri: lb://AUTH-SERVICE
