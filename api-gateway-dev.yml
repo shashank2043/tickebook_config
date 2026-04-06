@@ -44,7 +44,7 @@ spring:
             - id: consumer-service
               uri: lb://CONSUMER-SERVICE
               predicates:
-                - Path=/api/bookings/**,/api/booking-seats/**,/api/tickets/**
+                - Path=/api/bookings/**,/api/booking-seats/**,/api/tickets/**,/api/browse/**
               filters:
                 - name: CircuitBreaker
                   args:
