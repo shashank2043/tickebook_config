@@ -49,7 +49,7 @@ management:
     sampling:
       probability: 1.0   # trace all requests
     propagation:
-      type: b3
+      type: B3
 
   zipkin:
     tracing:
