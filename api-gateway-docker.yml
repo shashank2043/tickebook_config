@@ -197,6 +197,9 @@ management:
     tracing:
       endpoint: http://zipkin:9411/api/v2/spans
 logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    io.github.resilience4j: DEBUG
   pattern:
     level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
 resilience4j:
@@ -207,6 +210,14 @@ resilience4j:
         slidingWindowSize: 10
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
+  recordExceptions:
+    - java.io.IOException
+    - java.util.concurrent.TimeoutException
+    - org.springframework.web.server.ResponseStatusException
+    - reactor.netty.http.client.PrematureCloseException
+
+  ignoreExceptions:
+    - org.springframework.web.server.ServerWebInputException
   timelimiter:
     instances:
       globalCircuitBreaker:
