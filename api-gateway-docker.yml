@@ -85,11 +85,7 @@ spring:
               uri: lb://AUTH-SERVICE
               predicates:
                 - Path=/auth/**,/api/user/**
-              filters:
-                - name: CircuitBreaker
-                  args:
-                    name: globalCircuitBreaker
-                    fallbackUri: forward:/fallback
+
 
             - id: payment-service
               uri: lb://PAYMENT-SERVICE
