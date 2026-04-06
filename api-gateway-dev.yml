@@ -3,12 +3,13 @@ server:
 
 spring:
   cloud:
+    loadbalancer:
+      cache:
+        enabled: true
     gateway:
-      default-filters:
-        - name: CircuitBreaker
-          args:
-            name: globalCircuitBreaker
-            fallbackUri: forward:/fallback
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 10s
       server:
         webflux:
           globalcors:
@@ -34,7 +35,11 @@ spring:
               uri: lb://MOVIE-SERVICE
               predicates:
                 - Path=/api/movies/**
-
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: movieServiceCB
+                    fallbackUri: forward:/fallback
             - id: consumer-service
               uri: lb://CONSUMER-SERVICE
               predicates:
@@ -54,6 +59,11 @@ spring:
               uri: lb://ADMIN-SERVICE
               predicates:
                 - Path=/api/theatre-approval-requests/**,/api/role-approval-requests/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: movieServiceCB
+                    fallbackUri: forward:/fallback
 
             - id: auth-service-public
               uri: lb://AUTH-SERVICE
@@ -133,6 +143,7 @@ springdoc:
 eureka:
   client:
     registry-fetch-interval-seconds: 5
+    initial-instance-info-replication-interval-seconds: 5
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
@@ -158,3 +169,11 @@ management:
 logging:
   pattern:
     level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
+resilience4j:
+  circuitbreaker:
+    instances:
+      globalCircuitBreaker:
+        minimumNumberOfCalls: 5
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
