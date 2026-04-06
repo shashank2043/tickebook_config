@@ -65,3 +65,14 @@ management:
   endpoint:
     health:
       show-details: always
+resilience4j:
+  circuitbreaker:
+    instances:
+      MAIL-SERVER:
+        minimumNumberOfCalls: 5
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+  timelimiter:
+    instances:
+      MAIL-SERVER:
+        timeoutDuration: 30s
