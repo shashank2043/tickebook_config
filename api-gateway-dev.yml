@@ -38,7 +38,7 @@ spring:
               filters:
                 - name: CircuitBreaker
                   args:
-                    name: movieServiceCB
+                    name: globalCircuitBreaker
                     fallbackUri: forward:/fallback
 
             - id: consumer-service
@@ -48,7 +48,7 @@ spring:
               filters:
                 - name: CircuitBreaker
                   args:
-                    name: movieServiceCB
+                    name: globalCircuitBreaker
                     fallbackUri: forward:/fallback
 
             - id: show-service
@@ -58,7 +58,7 @@ spring:
               filters:
                 - name: CircuitBreaker
                   args:
-                    name: movieServiceCB
+                    name: globalCircuitBreaker
                     fallbackUri: forward:/fallback
 
             - id: theatre-service
@@ -68,7 +68,7 @@ spring:
               filters:
                 - name: CircuitBreaker
                   args:
-                    name: movieServiceCB
+                    name: globalCircuitBreaker
                     fallbackUri: forward:/fallback
 
             - id: admin-service
@@ -78,7 +78,7 @@ spring:
               filters:
                 - name: CircuitBreaker
                   args:
-                    name: movieServiceCB
+                    name: globalCircuitBreaker
                     fallbackUri: forward:/fallback
 
             - id: auth-service-public
@@ -93,7 +93,7 @@ spring:
               filters:
                 - name: CircuitBreaker
                   args:
-                    name: movieServiceCB
+                    name: globalCircuitBreaker
                     fallbackUri: forward:/fallback
 
             - id: monitoring-service
@@ -104,7 +104,7 @@ spring:
                 - StripPrefix=1
                 - name: CircuitBreaker
                   args:
-                    name: movieServiceCB
+                    name: globalCircuitBreaker
                     fallbackUri: forward:/fallback
 
             - id: auth-service-swagger
@@ -202,3 +202,7 @@ resilience4j:
         slidingWindowSize: 10
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
+  timelimiter:
+    instances:
+      globalCircuitBreaker:
+        timeoutDuration: 30s
