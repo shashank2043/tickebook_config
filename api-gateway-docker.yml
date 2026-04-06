@@ -188,10 +188,13 @@ management:
   tracing:
     sampling:
       probability: 1.0   # trace all requests
+    propagation:
+      type: B3
 
   zipkin:
     tracing:
       endpoint: http://zipkin:9411/api/v2/spans
+
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
