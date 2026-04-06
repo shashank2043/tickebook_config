@@ -7,5 +7,16 @@ management:
     web:
       exposure:
         include: "*"
+  tracing:
+    export:
+      zipkin:
+        endpoint: http://localhost:9411/api/v2/spans
+    sampling:
+      probability: 1.0   # trace all requests
+    propagation:
+      type: B3
 server:
   port: 9090
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
