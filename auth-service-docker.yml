@@ -55,8 +55,7 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE
     org.team11.tickebook: DEBUG   # your base package
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level ${spring.application.name:-auth-service} [%X{traceId}] %logger{36} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level ${spring.application.name:-auth-service} [%X{traceId}] %logger - %msg%n"
+    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
 management:
   endpoints:
     web:
@@ -65,6 +64,15 @@ management:
   endpoint:
     health:
       show-details: always
+  tracing:
+    export:
+      zipkin:
+        endpoint: http://zipkin:9411/api/v2/spans
+    sampling:
+      probability: 1.0   # trace all requests
+    propagation:
+      type: B3
+
 resilience4j:
   circuitbreaker:
     instances:
