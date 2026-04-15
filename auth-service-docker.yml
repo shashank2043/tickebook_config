@@ -46,7 +46,10 @@ eureka:
 #    prefer-ip-address: true
 jwt:
   secret: tickebook_auth_jwt_super_secure_secret_2026_value
-
+default:
+  admin:
+    email: admin@tickebook.com
+    password: admin123
 logging:
   level:
     root: INFO
