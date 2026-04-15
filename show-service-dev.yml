@@ -1,4 +1,10 @@
 spring:
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: false
+      micrometer:
+        enabled: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: Shashank@123
@@ -37,3 +43,11 @@ management:
 logging:
   pattern:
     level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
+resilience4j:
+  circuitbreaker:
+    instances:
+      THEATRE-SERVICE:
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s

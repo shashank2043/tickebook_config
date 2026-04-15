@@ -5,6 +5,8 @@ spring:
     openfeign:
       circuitbreaker:
         enabled: false
+      micrometer:
+        enabled: true
   main:
     lazy-initialization: true
   datasource:
